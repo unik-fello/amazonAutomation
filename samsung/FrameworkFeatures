@@ -1,0 +1,12 @@
+Features:
+    - Used POM design pattern to increase reusability and neat code maintenance
+    - Have a method to handle dynamic locators and its usage
+
+Usage: 
+    - Used the configuration file to a good extent, used workers, use block features including screenshot,
+    video, trace etc.
+    - Created JSON files to access data so the search product is dynamic 
+    - Added validations for data as well as the functionality like verifying login page title, the correct
+    product added to the cart and the cart count.
+    - Showcased playwright skip feature in a validation
+    - Showcased Window handling feature in playwright

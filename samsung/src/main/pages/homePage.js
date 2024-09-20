@@ -1,14 +1,18 @@
-const { expect, defineConfig, test } = require('@playwright/test');
+const { expect, test } = require('@playwright/test');
+// const { expect, defineConfig, test } = require('@playwright/test');
 
+let page;
 class AmazonHomePage {
-  constructor(page) {
-    this.page = page;
-  }
 
-  async loginToTheApp()
-  {
+  constructor(homePage) {
+    page = homePage;
+  }
+  async loginToTheApp() {
     // we are making use of baseURL configuration from playwright.config.js
-    await this.page.goto('/')
+    await page.goto('/')
+
+    // Validation for the page title with regex
+    await expect(page, "The page title doesn't contain the word 'Amazon.in'").toHaveTitle(/Amazon\.in/)
   }
 
 
@@ -16,15 +20,13 @@ class AmazonHomePage {
 
     await this.loginToTheApp();
 
-    
-    if ( !searchTerm)
-      {
-          await test.skip(true, "Search term should not be empty")
-      }
-    const searchInput = await this.page.locator('#twotabsearchtextbox');
+    // validation to check if the search term i sempty 
+    if (!searchTerm) {
+      await test.skip(true, "Search term should not be empty")
+    }
+    const searchInput = await page.locator('#twotabsearchtextbox');
     await searchInput.fill(searchTerm);
     await searchInput.press('Enter');
-
   }
 }
 
